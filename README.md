@@ -1,10 +1,14 @@
-# Filament Ban
-
-<p class="filament-hidden" align="center">
-  <img src="media/cover-2560x1440.jpg" alt="Filament Ban — ban and suspend users, block panel, API and login" width="1280" />
+<p align="center" class="filament-hidden">
+  <img src="media/cover-2560x1440.jpg" alt="Filament Ban" width="100%">
 </p>
 
+# Filament Ban
+
 Ban and suspend users from **Filament v5**. Add actions to your user resource; middleware blocks the panel, API, and login when an account is banned or suspended.
+
+<p align="center">
+  <img src="art/screenshot.png" alt="Users table with Ban, Suspend, and Unban actions" width="100%">
+</p>
 
 ## Requirements
 
