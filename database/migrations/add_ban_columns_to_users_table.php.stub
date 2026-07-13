@@ -1,0 +1,55 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        $table = (new (config('filament-ban.user_model')))->getTable();
+
+        Schema::table($table, function (Blueprint $blueprint) use ($table): void {
+            $columns = config('filament-ban.columns');
+
+            if (! Schema::hasColumn($table, $columns['banned_at'])) {
+                $blueprint->timestamp($columns['banned_at'])->nullable();
+            }
+
+            if (! Schema::hasColumn($table, $columns['ban_reason'])) {
+                $blueprint->text($columns['ban_reason'])->nullable();
+            }
+
+            if (! Schema::hasColumn($table, $columns['banned_by'])) {
+                $blueprint->foreignId($columns['banned_by'])->nullable()->constrained($table)->nullOnDelete();
+            }
+
+            if (! Schema::hasColumn($table, $columns['suspended_until'])) {
+                $blueprint->timestamp($columns['suspended_until'])->nullable();
+            }
+        });
+    }
+
+    public function down(): void
+    {
+        $table = (new (config('filament-ban.user_model')))->getTable();
+        $columns = config('filament-ban.columns');
+
+        Schema::table($table, function (Blueprint $blueprint) use ($table, $columns): void {
+            if (Schema::hasColumn($table, $columns['banned_by'])) {
+                $blueprint->dropConstrainedForeignId($columns['banned_by']);
+            }
+
+            $drop = collect([
+                $columns['banned_at'],
+                $columns['ban_reason'],
+                $columns['suspended_until'],
+            ])->filter(fn (string $column): bool => Schema::hasColumn($table, $column))->all();
+
+            if ($drop !== []) {
+                $blueprint->dropColumn($drop);
+            }
+        });
+    }
+};
