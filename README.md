@@ -137,6 +137,12 @@ Query scopes: `User::banned()`, `User::notBanned()`, `User::suspended()`, `User:
 'web_redirect' => null, // route name or path; null throws AuthenticationException
 ```
 
-## License
 
+## Support
+
+If this package helps you, consider supporting development:
+
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/muazzambuilds)
+
+## License
 MIT
